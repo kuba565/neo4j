@@ -25,52 +25,68 @@ type Query {
 type Mutation {
     writeCarDto(
         # create new car
-        carDto: InputCarDto!): CarDto
-#    updateCarDto(
-#        # update car
-#        carDto: InputCarDto!): Boolean
-#    deleteCarDto(
-#        # delete car
-#        id: ID!): Boolean
+        carDto: NewCarDto!): CarDto
+    updateCarDto(
+        # update car
+        carDto: UpdateCarDto!): Boolean
+    deleteCarDto(
+        # delete car
+        id: ID!): Boolean
 
     writeWorkerDto(
         # create new worker
-        workerDto: InputWorkerDto!): WorkerDto
-#    updateWorkerDto(
-#        # update worker
-#        workerDto: InputWorkerDto!): Boolean
-#    deleteWorkerDto(
-#        # delete worker
-#        id: ID!): Boolean
+        workerDto: NewWorkerDto!): WorkerDto
+    updateWorkerDto(
+        # update worker
+        workerDto: UpdateWorkerDto!): Boolean
+    deleteWorkerDto(
+        # delete worker
+        id: ID!): Boolean
 }
 
-# a new worker
-input InputWorkerDto {
+input UpdateWorkerDto {
     # The id of the worker.
-    id: ID
+    id: ID!
     # The car of the worker.
-    carDto: InputCarDto!
+    carDto: UpdateCarDto
     # The pesel of the worker.
     pesel: String!
     # The name of the worker.
     name: String!
     # The surname of the worker.
     surname: String!
+}
 
+# a new worker
+input NewWorkerDto {
+    # The car of the worker.
+    carDto: NewCarDto
+    # The pesel of the worker.
+    pesel: String!
+    # The name of the worker.
+    name: String!
+    # The surname of the worker.
+    surname: String!
 }
 
 # a new log
-input InputLogDto {
+input UpdateLogDto {
     # The id of the log.
-    id: ID
+    id: ID!
+    # The value of the new log.
+    value: String!
+}
+
+# a new log
+input NewLogDto {
     # The value of the new log.
     value: String!
 }
 
 # a new car
-input InputCarDto {
+input UpdateCarDto {
     # The id of the car.
-    id: ID
+    id: ID!
     # The weight of the new car.
     weight: String!
     # The number of seats of the new car.
@@ -78,7 +94,19 @@ input InputCarDto {
     # The registration number of the new car.
     registrationNumber: String!
     # The log of the new car.
-    logDto: InputLogDto
+    logDto: NewLogDto
+}
+
+# a new car
+input NewCarDto {
+    # The weight of the new car.
+    weight: String!
+    # The number of seats of the new car.
+    numberOfSeats: String!
+    # The registration number of the new car.
+    registrationNumber: String!
+    # The log of the new car.
+    logDto: NewLogDto
 }
 
 # An entity

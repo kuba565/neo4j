@@ -45,23 +45,23 @@ public class Mutation implements GraphQLMutationResolver {
         return workerTransformer.apply(worker);
     }
 
-//    public Boolean updateCarDto(CarDto carDto) {
-//        carService.update(carDtoTransformer.apply(carDto));
-//        return true;
-//    }
+    public Boolean updateCarDto(CarDto carDto) {
+        carService.save(carDtoTransformer.apply(carDto));
+        return true;
+    }
+
+    public Boolean updateWorkerDto(WorkerDto workerDto) {
+        workerService.save(workerDtoTransformer.apply(workerDto));
+        return true;
+    }
+
+    public Boolean deleteCarDto(Long id) {
+        carService.deleteById(id);
+        return true;
+    }
 //
-//    public Boolean updateWorkerDto(WorkerDto workerDto) {
-//        workerService.update(workerDtoTransformer.apply(workerDto));
-//        return true;
-//    }
-//
-//    public Boolean deleteCarDto(Long id) {
-//        carService.deleteById(id);
-//        return true;
-//    }
-//
-//    public Boolean deleteWorkerDto(Long id) {
-//        workerService.deleteById(id);
-//        return true;
-//    }
+    public Boolean deleteWorkerDto(Long id) {
+        workerService.deleteById(id);
+        return true;
+    }
 }
