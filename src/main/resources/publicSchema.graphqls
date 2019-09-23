@@ -1,0 +1,156 @@
+schema {
+    query: Query
+}
+
+type Query {
+    carDtos
+    # get all cars
+    : [CarDto]
+
+    carDto(
+        # The id of the car you are interested in
+        id : ID!
+    ) : CarDto
+
+    carDtoWithoutLog(
+    # The id of the car you are interested in
+    id : ID!
+    ) : CarDto
+
+    workerDtos
+    # get all workers
+    : [WorkerDto]
+
+    workerDto(
+        # The id of the worker you are interested in
+        id: ID!
+    ): WorkerDto
+}
+
+type Mutation {
+    writeCarDto(
+        # create new car
+        carDto: NewCarDto!): CarDto
+    updateCarDto(
+        # update car
+        carDto: UpdateCarDto!): Boolean
+    deleteCarDto(
+        # delete car
+        id: ID!): Boolean
+
+    writeWorkerDto(
+        # create new worker
+        workerDto: NewWorkerDto!): WorkerDto
+    updateWorkerDto(
+        # update worker
+        workerDto: UpdateWorkerDto!): Boolean
+    deleteWorkerDto(
+        # delete worker
+        id: ID!): Boolean
+}
+
+input UpdateWorkerDto {
+    # The id of the worker.
+    id: ID!
+    # The car of the worker.
+    carDto: UpdateCarDto
+    # The pesel of the worker.
+    pesel: String!
+    # The name of the worker.
+    name: String!
+    # The surname of the worker.
+    surname: String!
+}
+
+# a new worker
+input NewWorkerDto {
+    # The car of the worker.
+    carDto: NewCarDto
+    # The pesel of the worker.
+    pesel: String!
+    # The name of the worker.
+    name: String!
+    # The surname of the worker.
+    surname: String!
+}
+
+# a new log
+input UpdateLogDto {
+    # The id of the log.
+    id: ID!
+    # The value of the new log.
+    value: String!
+}
+
+# a new log
+input NewLogDto {
+    # The value of the new log.
+    value: String!
+}
+
+# a new car
+input UpdateCarDto {
+    # The id of the car.
+    id: ID!
+    # The weight of the new car.
+    weight: Int!
+    # The number of seats of the new car.
+    numberOfSeats: Int!
+    # The registration number of the new car.
+    registrationNumber: String!
+    # The log of the new car.
+    logDto: NewLogDto
+}
+
+# a new car
+input NewCarDto {
+    # The weight of the new car.
+    weight: String!
+    # The number of seats of the new car.
+    numberOfSeats: String!
+    # The registration number of the new car.
+    registrationNumber: String!
+    # The log of the new car.
+    logDto: NewLogDto
+}
+
+# An entity
+interface BaseModel {
+    # The id of the entity.
+    id: ID!
+}
+
+# A vehicle.
+type CarDto implements BaseModel {
+    # The id of the car.
+    id: ID!
+    # The weight of the car.
+    weight: Int!
+    # The number of seats of the car.
+    numberOfSeats: Int!
+    # The registration number of the car.
+    registrationNumber: String!
+    # The log of the car.
+    logDto: LogDto
+}
+
+type LogDto implements BaseModel {
+    # The id of the log.
+    id: ID!
+    # The value of the log.
+    value: String!
+}
+
+# A person employed by the company.
+type WorkerDto implements BaseModel {
+    # The id of the worker.
+    id: ID!
+    # The car of the worker.
+    carDto: CarDto!
+    # The pesel of the worker.
+    pesel: String!
+    # The name of the worker.
+    name: String!
+    # The surname of the worker.
+    surname: String!
+}
