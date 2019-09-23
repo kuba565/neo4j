@@ -22,8 +22,12 @@ public class CarService {
         return carRepository.findById(id);
     }
 
+    public Optional<Car> findCarByIdWithoutLog(Long id) {
+        return carRepository.findCarByIdWithoutLog(id);
+    }
+
     public Car save(Car car) {
-       return carRepository.save(car);
+        return carRepository.save(car);
     }
 
     public void deleteById(Long id) {

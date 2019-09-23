@@ -12,6 +12,11 @@ type Query {
         id : ID!
     ) : CarDto
 
+    carDtoWithoutLog(
+    # The id of the car you are interested in
+    id : ID!
+    ) : CarDto
+
     workerDtos
     # get all workers
     : [WorkerDto]
@@ -88,9 +93,9 @@ input UpdateCarDto {
     # The id of the car.
     id: ID!
     # The weight of the new car.
-    weight: String!
+    weight: Int!
     # The number of seats of the new car.
-    numberOfSeats: String!
+    numberOfSeats: Int!
     # The registration number of the new car.
     registrationNumber: String!
     # The log of the new car.
@@ -120,9 +125,9 @@ type CarDto implements BaseModel {
     # The id of the car.
     id: ID!
     # The weight of the car.
-    weight: String!
+    weight: Int!
     # The number of seats of the car.
-    numberOfSeats: String!
+    numberOfSeats: Int!
     # The registration number of the car.
     registrationNumber: String!
     # The log of the car.

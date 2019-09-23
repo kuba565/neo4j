@@ -36,6 +36,10 @@ public class Query implements GraphQLQueryResolver {
         return carTransformer.apply(carService.findById(id).get());
     }
 
+    public CarDto getCarDtoWithoutLog(Long id) {
+        return carTransformer.apply(carService.findCarByIdWithoutLog(id).get());
+    }
+
     public List<WorkerDto> getWorkerDtos() {
         List<WorkerDto> workerDtos = new ArrayList<>();
         workerService.findAll().forEach(worker -> workerDtos.add(workerTransformer.apply(worker)));

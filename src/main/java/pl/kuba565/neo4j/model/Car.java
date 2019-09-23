@@ -1,9 +1,6 @@
 package pl.kuba565.neo4j.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -14,6 +11,7 @@ import org.neo4j.ogm.annotation.Relationship;
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Car extends BaseModel {
     @Id
     @GeneratedValue
@@ -23,4 +21,11 @@ public class Car extends BaseModel {
     private String registrationNumber;
     @Relationship
     private Log log;
+
+    public Car(Long id, Integer weight, Integer numberOfSeats, String registrationNumber) {
+        this.id = id;
+        this.weight = weight;
+        this.numberOfSeats = numberOfSeats;
+        this.registrationNumber = registrationNumber;
+    }
 }
